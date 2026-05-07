@@ -1,80 +1,90 @@
-# Fuel Route Optimization API
+A scalable and efficient REST API built using Django
+ and Django REST Framework
+ that calculates the most fuel-efficient truck route between two locations.
 
-A Django REST API that calculates the optimal fuel stops between two locations for a truck route.
+The API estimates:
 
-The API:
-- Calculates route distance
-- Estimates fuel required
-- Finds fuel stations along the route
-- Calculates total fuel cost
-- Returns optimized fuel stop suggestions
+Route distance
+Fuel consumption
+Fuel cost
+Optimal fuel stops along the route
+Features
 
----
+✅ Calculate route distance between source and destination
+✅ Estimate total fuel required
+✅ Find nearby fuel stations along the route
+✅ Calculate estimated fuel expenses
+✅ Return optimized fuel stop suggestions
+✅ PostgreSQL database integration
+✅ CSV fuel station data import
+✅ RESTful API architecture
 
-# Technologies Used
-
-| Technology | Purpose |
-|------------|---------|
-| Python 3 | Programming Language |
-| Django | Backend Framework |
-| Django REST Framework | API Development |
-| PostgreSQL | Database |
-| Pandas | CSV Data Import |
-| OpenRouteService API | Route Distance & Directions |
-| Geopy | Geolocation |
-| Gunicorn | Deployment Server |
-
----
-
-# Project Setup (Step-by-Step)
-
-## 1. Install Python
-
-Download Python from:
-
-https://www.python.org/downloads/
-
-Verify installation:
-python3 --version
-
-2. Install PostgreSQL
+Tech Stack
+Technology	Purpose
+Python 3
+	Programming Language
+Django
+	Backend Framework
+Django REST Framework
+	REST API Development
+PostgreSQL
+	Database
+Pandas
+	CSV Processing
+Geopy
+	Geolocation Calculations
+OpenRouteService API
+	Route & Distance Calculation
+Gunicorn
+	Deployment Server
+Project Structure
+fuel_route_project/
+│
+├── config/
+│   ├── settings.py
+│   ├── urls.py
+│
+├── fuel/
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│
+├── manage.py
+├── requirements.txt
+├── fuel-prices.csv
+└── README.md
+Installation & Setup
+1. Clone Repository
+git clone https://github.com/Codingreddy/fuel-route-optimization-api.git
+cd fuel-route-optimization-api
+2. Create Virtual Environment
+Mac/Linux
+python3 -m venv venv
+source venv/bin/activate
+Windows
+python -m venv venv
+venv\Scripts\activate
+3. Install Dependencies
+pip install django djangorestframework psycopg2-binary pandas geopy requests python-dotenv gunicorn
+PostgreSQL Setup
+Install PostgreSQL
 
 Download PostgreSQL:
 
-https://www.postgresql.org/download/
+PostgreSQL Download
 
-Open pgAdmin and create database:
+Create Database
+
+Open pgAdmin and create a database:
 
 Database Name: fueldb
-
-3. Create Project Folder
-mkdir fuel_route_project
-cd fuel_route_project
-
-4. Create Virtual Environment
-python3 -m venv venv
-
-Activate virtual environment:
-
-Mac/Linux
-source venv/bin/activate
-Windows
-venv\Scripts\activate
-5. Install Dependencies
-pip install django djangorestframework psycopg2-binary pandas geopy requests python-dotenv
-6. Create Django Project
-django-admin startproject config .
-
-Create app:
-
-python manage.py startapp fuel
-7. Configure PostgreSQL
+Configure Django Database
 
 Open:
 
 config/settings.py
 
-Replace DATABASES section:
+Replace the DATABASES section:
 
 DATABASES = {
     'default': {
@@ -86,26 +96,23 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-8. Add Installed Apps
+Add Installed Apps
 
-In settings.py:
+Inside config/settings.py
 
 INSTALLED_APPS = [
     ...
     'rest_framework',
     'fuel',
 ]
-9. Run Migrations
+Run Database Migrations
 python manage.py makemigrations
 python manage.py migrate
-10. Create FuelStation Model
+Fuel Station Model
 
-Inside:
+File:
 
 fuel/models.py
-
-Example fields:
-
 from django.db import models
 
 class FuelStation(models.Model):
@@ -118,15 +125,15 @@ class FuelStation(models.Model):
 
     def __str__(self):
         return self.truckstop_name
-11. Import CSV Data
+Import CSV Fuel Data
 
-Place CSV file inside project folder.
+Place fuel-prices.csv inside the project root folder.
 
-Create import script:
+Open Django shell:
 
 python manage.py shell
 
-Example:
+Run:
 
 import pandas as pd
 from fuel.models import FuelStation
@@ -142,18 +149,20 @@ for _, row in df.iterrows():
         latitude=row['Latitude'],
         longitude=row['Longitude']
     )
-12. Create API View
+API Development
+Create API View
 
-Inside:
+File:
 
 fuel/views.py
 
-Create API endpoint for:
+The API performs:
 
-route calculation
-fuel optimization
-nearest fuel stations
-13. Configure URLs
+Route calculation
+Fuel optimization
+Fuel stop suggestions
+Fuel cost estimation
+URL Configuration
 fuel/urls.py
 from django.urls import path
 from .views import RouteAPIView
@@ -169,15 +178,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('fuel.urls')),
 ]
-14. Run Server
+Run Development Server
 python manage.py runserver
 
-Server runs at:
+Server URL:
 
 http://127.0.0.1:8000/
 API Endpoint
-POST Request
-/api/route/
+POST /api/route/
 Sample Request
 {
     "start": "Dallas",
@@ -201,16 +209,39 @@ Sample Response
 }
 Assumptions
 Truck mileage = 10 MPG
-Fuel prices are taken from CSV dataset
-Route calculated using OpenRouteService API
+Fuel prices are loaded from CSV dataset
+Route data fetched using OpenRouteService API
 Future Improvements
 JWT Authentication
 Docker Deployment
 Redis Caching
 Google Maps Integration
 Advanced Route Optimization
+Swagger API Documentation
+CI/CD Pipeline
 Run Tests
 python manage.py test
-Author
+Deployment
 
+Production deployment can be done using:
+
+Gunicorn
+Render
+Railway
+AWS EC2
+API Workflow
+User Request
+     ↓
+Route Calculation
+     ↓
+Fuel Consumption Estimation
+     ↓
+Nearby Fuel Station Search
+     ↓
+Cost Optimization
+     ↓
+JSON API Response
+Author
 Hemanth Reddy
+
+Backend Developer | Django Developer | Python Enthusiast
