@@ -10,14 +10,14 @@ Fuel cost
 Optimal fuel stops along the route
 Features
 
-✅ Calculate route distance between source and destination
-✅ Estimate total fuel required
-✅ Find nearby fuel stations along the route
-✅ Calculate estimated fuel expenses
-✅ Return optimized fuel stop suggestions
-✅ PostgreSQL database integration
-✅ CSV fuel station data import
-✅ RESTful API architecture
+Calculate route distance between source and destination
+Estimate total fuel required
+Find nearby fuel stations along the route
+Calculate estimated fuel expenses
+Return optimized fuel stop suggestions
+PostgreSQL database integration
+CSV fuel station data import
+RESTful API architecture
 
 Tech Stack
 Technology	Purpose
